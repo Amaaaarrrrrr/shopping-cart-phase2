@@ -1,16 +1,70 @@
-import { useState } from 'react'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
 import MainPage from "./components/MainPage";
 import CartPage from "./components/CartPage";
 
-function App() {
-  
-  return (
-    <>
-      <MainPage />
-      <CartPage />
-    </>
-  )
-}
+const App = () => {
 
-export default App
+  // Initialize products array with sample data
+  const products = [
+    { id: 1, name: "T-Shirt", price: 20 },
+    { id: 2, name: "Jeans", price: 40 },
+    { id: 3, name: "Sneakers", price: 60 },
+    { id: 4, name: "Hat", price: 15 },
+    { id: 5, name: "Socks", price: 5 },
+  ];
+
+  // Retrieve cart items from local storage
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  // save cart state to localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Add product to cart if it doesn't exist, or update quantity if it does
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+      if (existingProduct) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+  };
+
+  // Remove product from cart by id
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  };
+
+  // Update quantity of a product in cart by id
+  const updateQuantity = (productId, quantity) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
+      )
+    );
+  };
+
+  // Calculate total price of all items in the cart
+  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  // Render the main page or cart page based on the current URL
+  return (
+    <div className="App">
+      <MainPage products={products} addToCart={addToCart} />
+      <CartPage cart={cart} updateQuantity={updateQuantity} removeFromCart={removeFromCart} totalPrice={totalPrice} />
+    </div>
+  );
+};
+
+export default App;

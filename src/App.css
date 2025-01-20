@@ -1,42 +1,114 @@
-#root {
-  max-width: 1280px;
+/* App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: #161515;
+  color: #9e5151;
+}
+
+.App {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 20px;
+}
+
+h1 {
   text-align: center;
+  color: #754141;
+  margin-bottom: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.product-list,
+.cart {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.product,
+.cart-item {
+  background: #4b4242;
+  border: 1px solid #998c8c;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.product h2,
+.cart-item h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
-.card {
-  padding: 2em;
+.product p,
+.cart-item p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #f8d7d7;
 }
 
-.read-the-docs {
-  color: #888;
+button {
+  background-color: #574f49;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #454b52;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+}
+
+.cart-item button {
+  margin: 5px;
+}
+
+.cart-item button:first-child {
+  background-color: #28a745;
+}
+
+.cart-item button:first-child:hover {
+  background-color: #218838;
+}
+
+.cart-item button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+.cart-item button:nth-child(2):hover {
+  background-color: #947d7f;
+}
+
+.cart h2 {
+  margin-top: 20px;
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #a09b9b;
+  margin-top: 20px;
 }
