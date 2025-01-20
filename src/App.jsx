@@ -64,20 +64,24 @@ const App = () => {
     );
   };
 
+  // Function to clear the cart
+  const clearCart = () => {
+    setCart([]);
+  };
+
   // Calculate total price of all items in the cart
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   // Render the main page or cart page based on the current URL
   return (
     <div className="App">
-      <MainPage products={products} 
-                addToCart={addToCart} 
-      />
+      <MainPage products={products} addToCart={addToCart} />
       <CartPage 
-                cart={cart} 
-                updateQuantity={updateQuantity} 
-                removeFromCart={removeFromCart} 
-                totalPrice={totalPrice}
+            cart={cart} 
+            updateQuantity={updateQuantity} 
+            removeFromCart={removeFromCart} 
+            totalPrice={totalPrice}
+            clearCart={clearCart}
       />
     </div>
   );
