@@ -1,7 +1,6 @@
-import  { useState } from "react";
+import { useState } from "react";
 
 const MainPage = ({ products, addToCart }) => {
-
   // State variables for sorting and searching
   const [sortOption, setSortOption] = useState("name-asc");
   const [searchQuery, setSearchQuery] = useState("");
@@ -66,6 +65,7 @@ const MainPage = ({ products, addToCart }) => {
         {sortedAndFilteredProducts.map((product) => (
           <div key={product.id} className="product">
             <h2>{product.name}</h2>
+            <img src={product.image} alt={product.name} width="200" />
             <p>Price: ${product.price}</p>
             <button onClick={() => addToCart(product)}>Add to Cart</button>
           </div>

@@ -3,15 +3,24 @@ import "./App.css";
 import MainPage from "./components/MainPage";
 import CartPage from "./components/CartPage";
 
+//importing images
+import tshirtImage from "./assets/tshirt.jpeg"
+import jeansImage from "./assets/jeans.jpeg"
+import sneakersImage from "./assets/sneakers.jpeg"
+import hatImage from "./assets/hats.jpeg"
+import socksImage from "./assets/socks.jpeg"
+
+
+
 const App = () => {
 
   // Initialize products array with sample data
   const products = [
-    { id: 1, name: "T-Shirt", price: 20 },
-    { id: 2, name: "Jeans", price: 40 },
-    { id: 3, name: "Sneakers", price: 60 },
-    { id: 4, name: "Hat", price: 15 },
-    { id: 5, name: "Socks", price: 5 },
+    { id: 1, name: "T-Shirt", price: 20, image: tshirtImage},
+    { id: 2, name: "Jeans", price: 40, image: jeansImage },
+    { id: 3, name: "Sneakers", price: 60, image: sneakersImage },
+    { id: 4, name: "Hat", price: 15, image: hatImage},
+    { id: 5, name: "Socks", price: 5, image: socksImage },
   ];
 
   // Retrieve cart items from local storage
@@ -61,8 +70,15 @@ const App = () => {
   // Render the main page or cart page based on the current URL
   return (
     <div className="App">
-      <MainPage products={products} addToCart={addToCart} />
-      <CartPage cart={cart} updateQuantity={updateQuantity} removeFromCart={removeFromCart} totalPrice={totalPrice} />
+      <MainPage products={products} 
+                addToCart={addToCart} 
+      />
+      <CartPage 
+                cart={cart} 
+                updateQuantity={updateQuantity} 
+                removeFromCart={removeFromCart} 
+                totalPrice={totalPrice}
+      />
     </div>
   );
 };
