@@ -3,33 +3,30 @@ import "./App.css";
 import MainPage from "./components/MainPage";
 import CartPage from "./components/CartPage";
 
-//importing images
-import tshirtImage from "./assets/tshirt.jpeg"
-import jeansImage from "./assets/jeans.jpeg"
-import sneakersImage from "./assets/sneakers.jpeg"
-import hatImage from "./assets/hats.jpeg"
-import socksImage from "./assets/socks.jpeg"
-
-
+// Importing images
+import tshirtImage from "./assets/tshirt.jpeg";
+import jeansImage from "./assets/jeans.jpeg";
+import sneakersImage from "./assets/sneakers.jpeg";
+import hatImage from "./assets/hats.jpeg";
+import socksImage from "./assets/socks.jpeg";
 
 const App = () => {
-
   // Initialize products array with sample data
   const products = [
-    { id: 1, name: "T-Shirt", price: 20, image: tshirtImage},
+    { id: 1, name: "T-Shirt", price: 20, image: tshirtImage },
     { id: 2, name: "Jeans", price: 40, image: jeansImage },
     { id: 3, name: "Sneakers", price: 60, image: sneakersImage },
-    { id: 4, name: "Hat", price: 15, image: hatImage},
+    { id: 4, name: "Hat", price: 15, image: hatImage },
     { id: 5, name: "Socks", price: 5, image: socksImage },
   ];
 
-  // Retrieve cart items from local storage
+  // Retrieve cart items from local storage or initialize as an empty array
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
-  // save cart state to localStorage
+  // Save cart to localStorage whenever cart state changes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -64,24 +61,25 @@ const App = () => {
     );
   };
 
-  // Function to clear the cart
+  // Clear the cart and remove data from local storage
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem("cart");
   };
 
   // Calculate total price of all items in the cart
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
-  // Render the main page or cart page based on the current URL
+  // Render the main page and cart page
   return (
     <div className="App">
       <MainPage products={products} addToCart={addToCart} />
-      <CartPage 
-            cart={cart} 
-            updateQuantity={updateQuantity} 
-            removeFromCart={removeFromCart} 
-            totalPrice={totalPrice}
-            clearCart={clearCart}
+      <CartPage
+        cart={cart}
+        updateQuantity={updateQuantity}
+        removeFromCart={removeFromCart}
+        totalPrice={totalPrice}
+        clearCart={clearCart}
       />
     </div>
   );

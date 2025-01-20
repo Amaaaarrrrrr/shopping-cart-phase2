@@ -24,5 +24,5 @@ const CartPage = ({ cart, updateQuantity, removeFromCart, totalPrice, clearCart 
     );
   };
   
-export default CartPage;
+  export default CartPage;
   
